@@ -11,7 +11,7 @@
         "php": "^7.2",
         "barryvdh/laravel-dompdf": "^0.8.5",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^5.6",
+        "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
@@ -24,7 +24,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     },
     "extra": {
         "laravel": {
