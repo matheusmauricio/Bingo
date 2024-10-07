@@ -1,0 +1,9 @@
+:root {
+    --background-color: #ebf2fa; /* Fundo principal */
+    --primary-color: #427aa1; /* Cor principal para textos e títulos */
+    --border-color: #427aa1; /* Borda do formulário */
+    --input-border-color: #064789; /* Borda dos inputs */
+    --focus-color: #427aa1; /* Cor de foco nos inputs */
+    --button-color: #064789; /* Cor do botão */
+    --button-hover-color: #427aa1; /* Cor do botão ao passar o mouse */
+}

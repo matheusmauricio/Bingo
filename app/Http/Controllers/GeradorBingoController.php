@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class GeradorBingoController extends Controller
 {
@@ -49,11 +50,17 @@ class GeradorBingoController extends Controller
     public function gerarNovo(Request $request){
         // Validar os dados do formulário
         $request->validate([
-            'numeroInferior'        => 'required|integer',
-            'numeroSuperior'        => 'required|integer',
-            'quantidadeLinhas'      => 'required|integer',
-            'quantidadeColunas'     => 'required|integer',
-            'quantidadeCartelas'    => 'required|integer',
+            'numeroInferior'        => 'required|integer|min:1',
+            'numeroSuperior'        => 'required|integer|min:1',
+            'quantidadeLinhas'      => 'required|integer|min:1|max:9',
+            'quantidadeColunas'     => 'required|integer|min:1|max:9',
+            'quantidadeCartelas'    => 'required|integer|min:1',
+        ], [], [
+            'numeroInferior'        => 'Menor número',
+            'numeroSuperior'        => 'Maior número',
+            'quantidadeLinhas'      => 'Quantidade de linhas',
+            'quantidadeColunas'     => 'Quantidade de colunas',
+            'quantidadeCartelas'    => 'Quantidade de cartelas',
         ]);
 
         // Obter os dados do formulário
@@ -62,6 +69,10 @@ class GeradorBingoController extends Controller
         $linhas             = $request->input('quantidadeLinhas');
         $colunas            = $request->input('quantidadeColunas');
         $quantidadeCartelas = $request->input('quantidadeCartelas');
+
+        if($numeroInicial >= $numeroFinal){
+            return back()->withErrors(['numeroInferior' => 'Número inicial não pode ser maior ou igual que o número final'])->withInput();
+        }
 
         // Gerar as cartelas de bingo
         $cartelas = $this->gerarCartelasBingo($numeroInicial, $numeroFinal, $linhas, $colunas, $quantidadeCartelas);
