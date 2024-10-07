@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::post('/gerar', 'GeradorBingoController@gerar');
+Route::post('/gerar', 'GeradorBingoController@gerarNovo');
